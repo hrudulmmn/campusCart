@@ -1,10 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Browse from "./pages/Browse";
@@ -16,19 +11,12 @@ import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
 import "./App.css";
 
+// NOTE: The original App.jsx had a beforeunload handler that called
+// localStorage.clear() — this has been intentionally removed. With MERN,
+// session state lives in the DB. The JWT token in localStorage should persist
+// across page reloads so the user stays logged in.
+
 function App() {
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      localStorage.clear();
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
-
   return (
     <AuthProvider>
       <CartProvider>
