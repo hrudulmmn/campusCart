@@ -22,6 +22,7 @@ const Browse = () => {
       try {
         const res = await api.get("/items");
         setItems(res.data.items);
+        console.log("Backend response:", res.data);
       } catch (err) {
         console.error("Failed to fetch items:", err);
       } finally {
