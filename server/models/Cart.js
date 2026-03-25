@@ -21,10 +21,10 @@ const cartSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-      unique: true, // one cart per user
+      unique: true, 
     },
     items: [cartItemSchema],
-    // Computed totals — kept in sync by pre-save hook
+
     total: { type: Number, default: 0 },
     tax: { type: Number, default: 0 },
     finalTotal: { type: Number, default: 0 },
@@ -32,7 +32,7 @@ const cartSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Mirrors Cart.js #updateTotals() logic
+
 cartSchema.pre("save", function (next) {
   this.total = this.items.reduce(
     (sum, item) => sum + item.price * item.quantity,

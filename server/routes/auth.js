@@ -24,8 +24,10 @@ const userResponse = (user) => ({
 
 // POST /api/auth/register
 router.post("/register", async (req, res) => {
+  const userRole =
+  email === "admin@campuscart.com" ? "admin" : role || "buyer";
   try {
-    const { name, email, password, role, phone, whatsapp } = req.body;
+    const { name, email, password, role:userRole, phone, whatsapp } = req.body;
 
     if (await User.findOne({ email })) {
       return res.status(400).json({ success: false, message: "Email already registered" });

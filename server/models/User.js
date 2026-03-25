@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
       minlength: 6,
       select: false,
     },
-    // Matches roles from original User.js: buyer | seller | admin
+  
     role: {
       type: String,
       enum: ["buyer", "seller", "admin"],
